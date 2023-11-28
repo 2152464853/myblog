@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo_2.dao.BlogDao">
+    <select id="getAllBlogsByUserId" resultType="com.example.demo_2.entity.Blog">
+        select * from m_blog where user_id=#{user_id}
+
+    </select>
+
+    <select id="getBlogs" resultType="com.example.demo_2.entity.Blog">
+        select * from m_blog limit #{pagenum},#{pagesize}
+    </select>
+
+    <select id="getTotal" resultType="Integer">
+        select count(*) from m_blog
+    </select>
+
+    <select id="getBlogById" resultType="com.example.demo_2.entity.Blog">
+        select * from m_blog where id=#{id}
+    </select>
+
+    <insert id="editBlog" parameterType="com.example.demo_2.entity.Blog">
+        replace into m_blog(id,user_id,title,description,content,created,status)
+            values (#{blog.id},#{blog.user_id},#{blog.title},#{blog.description},#{blog.content},#{blog.created},#{blog.status})
+    </insert>
+
+    <delete id="deleteBlog">
+        delete from m_blog where id=#{id}
+    </delete>
+
+</mapper>
